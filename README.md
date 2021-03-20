@@ -135,7 +135,7 @@ Schemes: http
         </td>
     </tr>
     <tr>
-        <td style="border: 1px solid #ddd;padding: 5px;" rowspan="2">
+        <td style="border: 1px solid #ddd;padding: 5px;" rowspan="1">
             <a href="#summary">/movies/{movieName}</a>
         </td>
         <td style="border: 1px solid #ddd;padding: 5px;">
@@ -148,8 +148,8 @@ Schemes: http
             <p>MovieController -> getMovie()</p>
         </td>
     </tr>
-<tr>
-        <td style="border: 1px solid #ddd;padding: 5px;" rowspan="2">
+    <tr>
+        <td style="border: 1px solid #ddd;padding: 5px;" rowspan="1">
             <a href="#summary">/rating</a>
         </td>
         <td style="border: 1px solid #ddd;padding: 5px;">
