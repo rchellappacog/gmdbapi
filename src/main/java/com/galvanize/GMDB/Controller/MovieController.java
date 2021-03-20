@@ -17,9 +17,13 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
-    @GetMapping
-    public ResponseEntity<?> getMovie(){
-        return ResponseEntity.ok(movieService.getMovies());
+    @GetMapping("/{movieName}")
+    public ResponseEntity<?> getMovie(@PathVariable(required = false) String movieName){
+        return movieName == null ?
+                ResponseEntity.ok(movieService.getMovies())
+                :
+                ResponseEntity.ok(movieService.getMovieByName(movieName))
+                ;
     }
 
     @PostMapping

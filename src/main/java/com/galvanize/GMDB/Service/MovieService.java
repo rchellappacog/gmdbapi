@@ -26,4 +26,12 @@ public class MovieService {
     public List<Movie> getMovies() {
         return movieList;
     }
+
+    public Movie getMovieByName(String movieName) {
+
+        return movieList.stream()
+                .filter(movie -> movie.getName().equals(movieName))
+                .findAny()
+                .orElse(null);
+    }
 }

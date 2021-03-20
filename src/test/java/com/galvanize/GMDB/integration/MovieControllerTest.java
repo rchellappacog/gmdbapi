@@ -71,11 +71,10 @@ public class MovieControllerTest {
         Movie movie = new Movie();
         movie.setName("Avengers");
         MovieService.movieList.add(movie);
-        RequestBuilder go = get("/movies");
+        RequestBuilder go = get("/movies/Avengers");
         mockMvc.perform(go)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].name").value("Avengers"))
+                .andExpect(jsonPath("name").value("Avengers"))
                 .andDo(print());
     }
 
