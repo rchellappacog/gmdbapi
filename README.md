@@ -42,7 +42,6 @@ Application Goals from User Stories are:
 - Spring boot is used for the backend Services.
 - H2 database
 - Junit and Mockito for Tests.
-- Postgres is Used for the database.
 
 ## General Approach
 
