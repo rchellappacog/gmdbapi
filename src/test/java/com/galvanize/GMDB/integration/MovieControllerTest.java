@@ -78,4 +78,19 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("$[0].name").value("Avengers"))
                 .andDo(print());
     }
+
+    /**
+     * Given the GBDB has many movies
+     * When I visit GMDB movies
+     * Then I should see that movie in GMDB movies
+     */
+
+    @Test
+    public void getMovieWhenManyMovieExistTest() throws Exception {
+        RequestBuilder go = get("/movies");
+        mockMvc.perform(go)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(4)))
+                .andDo(print());
+    }
 }
