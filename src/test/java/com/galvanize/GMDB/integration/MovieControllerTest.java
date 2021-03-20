@@ -1,8 +1,9 @@
 package com.galvanize.GMDB.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.galvanize.GMDB.Pojo.Movie;
+import com.galvanize.GMDB.Entity.Movie;
 import com.galvanize.GMDB.Service.MovieService;
+import com.galvanize.GMDB.repository.MovieRepository;
 import com.galvanize.GMDB.request.MovieRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -32,14 +34,17 @@ public class MovieControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
+    @Autowired
+    MovieRepository movieRepository;
+
     @BeforeEach
     public void init() {
-        MovieService.movieList = new ArrayList<>();
+        movieRepository.deleteAll();
     }
 
     @Test
     public void getMovieWhenNoneExistTest() throws Exception {
-        RequestBuilder go = get                                                                 ("/movies");
+        RequestBuilder go = get("/movies");
         mockMvc.perform(go)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)))
@@ -48,7 +53,8 @@ public class MovieControllerTest {
 
     @Test
     public void postMovieWhenReleasedTest() throws Exception {
-        MovieRequest mr = new MovieRequest("Aliens");
+        MovieRequest mr = new MovieRequest();
+        mr.setTitle("Aliens");
         RequestBuilder post = post("/movies")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
@@ -76,8 +82,8 @@ public class MovieControllerTest {
         movie.setDescription("Avengeeeeeeee");
         movie.setRating("");
         movie.setReleasedYear("2012");
+        movieRepository.save(movie);
 
-        MovieService.movieList.add(movie);
         RequestBuilder go = get("/movies/Avengers");
         mockMvc.perform(go)
                 .andExpect(status().isOk())
@@ -86,7 +92,7 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("actors").value("Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth"))
                 .andExpect(jsonPath("releasedYear").value("2012"))
                 .andExpect(jsonPath("rating").value(""))
-                                .andExpect(jsonPath("description").value("Avengeeeeeeee"))
+                .andExpect(jsonPath("description").value("Avengeeeeeeee"))
                 .andDo(print());
     }
 
@@ -99,8 +105,8 @@ public class MovieControllerTest {
         movie.setDescription("Avengeeeeeeee");
         movie.setRating("");
         movie.setReleasedYear("2012");
+        movieRepository.save(movie);
 
-        MovieService.movieList.add(movie);
         RequestBuilder go = get("/movies/AnythingElse");
         mockMvc.perform(go)
                 .andExpect(status().is4xxClientError())
@@ -116,11 +122,16 @@ public class MovieControllerTest {
 
     @Test
     public void getMovieWhenManyMovieExistTest() throws Exception {
-        Movie avengers = new Movie();avengers.setTitle("Avengers");
-        Movie wonderwoman = new Movie();wonderwoman.setTitle("Wonder Woman");
-        Movie justiceLeague = new Movie();justiceLeague.setTitle("Justice League");
-        Movie starWars = new Movie();starWars.setTitle("Star Wars");
-        MovieService.movieList.addAll(Arrays.asList(avengers, wonderwoman, justiceLeague, starWars));
+        Movie avengers = new Movie();
+        avengers.setTitle("Avengers");
+        Movie wonderwoman = new Movie();
+        wonderwoman.setTitle("Wonder Woman");
+        Movie justiceLeague = new Movie();
+        justiceLeague.setTitle("Justice League");
+        Movie starWars = new Movie();
+        starWars.setTitle("Star Wars");
+        movieRepository.saveAll(Arrays.asList(avengers, wonderwoman, justiceLeague, starWars));
+
         RequestBuilder go = get("/movies")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON);
