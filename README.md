@@ -20,7 +20,6 @@
 - [Stories and Acceptance Criteria](#stories-and-acceptance-criteria)
 - [Technology Used](#technology-used)
 - [General Approach](#general-approach)
-- [Architecture](#architecture)
 - [Installation Instruction](#installation-instruction)
 - [API](#api)
 - [What's Included](#whats-included)
