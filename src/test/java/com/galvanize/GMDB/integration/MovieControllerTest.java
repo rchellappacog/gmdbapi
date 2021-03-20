@@ -39,7 +39,7 @@ public class MovieControllerTest {
 
     @Test
     public void getMovieWhenNoneExistTest() throws Exception {
-        RequestBuilder go = get("/movies");
+        RequestBuilder go = get                                                                 ("/movies");
         mockMvc.perform(go)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)))
@@ -63,19 +63,19 @@ public class MovieControllerTest {
         mockMvc.perform(get)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].name").value("Aliens"))
+                .andExpect(jsonPath("$[0].title").value("Aliens"))
                 .andDo(print());
     }
 
     @Test
     public void getMovieWhenAMovieExistTest() throws Exception {
         Movie movie = new Movie();
-        movie.setName("Avengers");
+        movie.setTitle("Avengers");
         MovieService.movieList.add(movie);
         RequestBuilder go = get("/movies/Avengers");
         mockMvc.perform(go)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("Avengers"))
+                .andExpect(jsonPath("title").value("Avengers"))
                 .andDo(print());
     }
 
@@ -87,10 +87,10 @@ public class MovieControllerTest {
 
     @Test
     public void getMovieWhenManyMovieExistTest() throws Exception {
-        Movie avengers = new Movie();avengers.setName("Avengers");
-        Movie wonderwoman = new Movie();wonderwoman.setName("Wonder Woman");
-        Movie justiceLeague = new Movie();justiceLeague.setName("Justice League");
-        Movie starWars = new Movie();starWars.setName("Star Wars");
+        Movie avengers = new Movie();avengers.setTitle("Avengers");
+        Movie wonderwoman = new Movie();wonderwoman.setTitle("Wonder Woman");
+        Movie justiceLeague = new Movie();justiceLeague.setTitle("Justice League");
+        Movie starWars = new Movie();starWars.setTitle("Star Wars");
         MovieService.movieList.addAll(Arrays.asList(avengers, wonderwoman, justiceLeague, starWars));
         RequestBuilder go = get("/movies")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -99,10 +99,10 @@ public class MovieControllerTest {
         mockMvc.perform(go)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(4)))
-                .andExpect(jsonPath("$[0].name").value("Avengers"))
-                .andExpect(jsonPath("$[1].name").value("Wonder Woman"))
-                .andExpect(jsonPath("$[2].name").value("Justice League"))
-                .andExpect(jsonPath("$[3].name").value("Star Wars"))
+                .andExpect(jsonPath("$[0].title").value("Avengers"))
+                .andExpect(jsonPath("$[1].title").value("Wonder Woman"))
+                .andExpect(jsonPath("$[2].title").value("Justice League"))
+                .andExpect(jsonPath("$[3].title").value("Star Wars"))
                 .andDo(print());
     }
 }

@@ -18,7 +18,7 @@ public class MovieService {
 
     public MovieResponse create(MovieRequest movie) {
         Movie newMovie = new Movie();
-        newMovie.setName(movie.getName());
+        newMovie.setTitle(movie.getTitle());
         movieList.add(newMovie);
         return new MovieResponse("Movie has been created.");
     }
@@ -30,7 +30,7 @@ public class MovieService {
     public Movie getMovieByName(String movieName) {
 
         return movieList.stream()
-                .filter(movie -> movie.getName().equals(movieName))
+                .filter(movie -> movie.getTitle().equals(movieName))
                 .findAny()
                 .orElse(null);
     }
