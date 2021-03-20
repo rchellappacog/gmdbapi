@@ -71,11 +71,22 @@ public class MovieControllerTest {
     public void getMovieWhenAMovieExistTest() throws Exception {
         Movie movie = new Movie();
         movie.setTitle("Avengers");
+        movie.setDirector("Joss");
+        movie.setActors("Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth");
+        movie.setDescription("Avengeeeeeeee");
+        movie.setRating(null);
+        movie.setReleasedYear("2012");
+
         MovieService.movieList.add(movie);
         RequestBuilder go = get("/movies/Avengers");
         mockMvc.perform(go)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("title").value("Avengers"))
+                .andExpect(jsonPath("director").value("Joss"))
+                .andExpect(jsonPath("actors").value("Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth"))
+                .andExpect(jsonPath("releasedYear").value("2012"))
+                .andExpect(jsonPath("rating").value(null))
+                                .andExpect(jsonPath("description").value("Avengeeeeeeee"))
                 .andDo(print());
     }
 
