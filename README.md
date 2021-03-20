@@ -55,6 +55,11 @@ We used pair programming and collaborated with each other and tried to stick to 
 
 ## Installation Instruction
 
+Software Requirement:
+1. Gradle ([install](https://gradle.org/install/))
+
+2. Java (minimum java 8) ([install](https://www.oracle.com/java/technologies/javase-downloads.html))
+
 Follow these easy step:
 
 
@@ -70,7 +75,6 @@ Follow these easy step:
      $ cd \build\libs
      $ java -jar GMDB-0.0.1-SNAPSHOT.jar
      ```
-    * if don't have Gradle install from [here](https://gradle.org/install/)
 3. Enjoy
 
 
