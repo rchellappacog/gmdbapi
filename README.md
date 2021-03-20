@@ -19,6 +19,7 @@
 
 - [Stories and Acceptance Criteria](#stories-and-acceptance-criteria)
 - [Technology Used](#technology-used)
+- [General Approach](#general-approach)
 - [Architecture](#architecture)
 - [Installation Instruction](#installation-instruction)
 - [API](#api)
@@ -85,7 +86,66 @@ Schemes: http
 ```
 
 ## API Reference
-
+<table style="
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: transparent;
+    display: table;
+">
+    <thead>
+    <tr>
+        <th>Path</th>
+        <th>Operation</th>
+        <th>Description</th>
+        <th>Controller -> Method</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td style="border: 1px solid #ddd;padding: 5px;" rowspan="2">
+            <a href="#summary">/movies/</a>
+        </td>
+        <td style="border: 1px solid #ddd;padding: 5px;">
+            <a href="#">GET</a>
+        </td>
+        <td style="border: 1px solid #ddd;padding: 5px;">
+            <p>Get list of movies. </p>
+        </td>
+        <td style="border: 1px solid #ddd;padding: 5px;">
+            <p>MovieController -> getMovie()</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="border: 1px solid #ddd;padding: 5px;">
+            <a href="#">POST</a>
+        </td>
+        <td style="border: 1px solid #ddd;padding: 5px;">
+            <p>Create a Movie Into the Database</p>
+        </td>
+        <td style="border: 1px solid #ddd;padding: 5px;">
+            <p>MovieController -> createMovie()</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="border: 1px solid #ddd;padding: 5px;" rowspan="2">
+            <a href="#summary">/movies/{movieName}</a>
+        </td>
+        <td style="border: 1px solid #ddd;padding: 5px;">
+            <a href="#">GET</a>
+        </td>
+        <td style="border: 1px solid #ddd;padding: 5px;">
+            <p>Get Movie by Movie Name</p>
+        </td>
+        <td style="border: 1px solid #ddd;padding: 5px;">
+            <p>MovieController -> getMovie()</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 ## What's included
 
@@ -98,6 +158,27 @@ File Tree.
 
 
 ```text
+
+└───src
+    ├───main
+    │   ├───generated
+    │   ├───java
+    │   │   └───com
+    │   │       └───galvanize
+    │   │           └───GMDB
+    │   │               ├───Controller
+    │   │               ├───Pojo
+    │   │               ├───request
+    │   │               ├───response
+    │   │               └───Service
+    │   └───resources
+    └───test
+        └───java
+            └───com
+                └───galvanize
+                    └───GMDB
+                        └───integration
+
 ```
 
 </details>
