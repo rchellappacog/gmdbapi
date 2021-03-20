@@ -1,6 +1,9 @@
 package com.galvanize.GMDB.integration;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.galvanize.GMDB.Pojo.Movie;
 import com.galvanize.GMDB.Service.MovieService;
+import com.galvanize.GMDB.request.MovieRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +28,16 @@ public class MovieControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    ObjectMapper objectMapper;
+
     @BeforeEach
     public void init() {
         MovieService.movieList = new ArrayList<>();
     }
 
     @Test
-    public void getMovieTest() throws Exception {
+    public void getMovieWhenNoneExistTest() throws Exception {
         RequestBuilder go = get("/movies");
         mockMvc.perform(go)
                 .andExpect(status().isOk())
@@ -41,10 +47,11 @@ public class MovieControllerTest {
 
     @Test
     public void postMovieWhenReleasedTest() throws Exception {
+        MovieRequest mr = new MovieRequest("Aliens");
         RequestBuilder post = post("/movies")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .content("{}");
+                .content(objectMapper.writeValueAsString(mr));
 
         mockMvc.perform(post)
                 .andExpect(status().isCreated())
@@ -55,7 +62,20 @@ public class MovieControllerTest {
         mockMvc.perform(get)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].name").value("Aliens"))
                 .andDo(print());
+    }
 
+    @Test
+    public void getMovieWhenAMovieExistTest() throws Exception {
+        Movie movie = new Movie();
+        movie.setName("Avengers");
+        MovieService.movieList.add(movie);
+        RequestBuilder go = get("/movies");
+        mockMvc.perform(go)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].name").value("Avengers"))
+                .andDo(print());
     }
 }
