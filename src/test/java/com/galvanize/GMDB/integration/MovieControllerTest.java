@@ -103,7 +103,7 @@ public class MovieControllerTest {
         MovieService.movieList.add(movie);
         RequestBuilder go = get("/movies/AnythingElse");
         mockMvc.perform(go)
-                .andExpect(status().isOk())
+                .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("message").value("Movie not available"))
                 .andDo(print());
     }

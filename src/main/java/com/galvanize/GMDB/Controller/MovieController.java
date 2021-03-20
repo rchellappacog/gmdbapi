@@ -1,5 +1,6 @@
 package com.galvanize.GMDB.Controller;
 
+import com.galvanize.GMDB.Exception.MovieNotFoundException;
 import com.galvanize.GMDB.Service.MovieService;
 import com.galvanize.GMDB.request.MovieRequest;
 import com.galvanize.GMDB.response.MovieResponse;
@@ -16,11 +17,11 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping(value={"/movies", "/movies/{movieName}"})
-    public ResponseEntity<?> getMovie(@PathVariable(required = false) String movieName){
+    public ResponseEntity<?> getMovie(@PathVariable(required = false) String movieName) throws MovieNotFoundException {
         return movieName == null ?
                 ResponseEntity.ok(movieService.getMovies())
                 :
-                ResponseEntity.ok(movieService.getMovieByName(movieName)!=null?movieService.getMovieByName(movieName):new MovieResponse("Movie not available"))
+                ResponseEntity.ok(movieService.getMovieByName(movieName))
                 ;
     }
 

@@ -1,5 +1,6 @@
 package com.galvanize.GMDB.Service;
 
+import com.galvanize.GMDB.Exception.MovieNotFoundException;
 import com.galvanize.GMDB.Pojo.Movie;
 import com.galvanize.GMDB.request.MovieRequest;
 import com.galvanize.GMDB.response.MovieResponse;
@@ -27,11 +28,15 @@ public class MovieService {
         return movieList;
     }
 
-    public Movie getMovieByName(String movieName) {
-
-        return movieList.stream()
+    public Movie getMovieByName(String movieName) throws MovieNotFoundException {
+        Movie savedMovie = movieList.stream()
                 .filter(movie -> movie.getTitle().equals(movieName))
                 .findAny()
                 .orElse(null);
+        if(savedMovie==null){
+            throw new MovieNotFoundException("Movie not available");
+        }else{
+            return savedMovie;
+        }
     }
 }
