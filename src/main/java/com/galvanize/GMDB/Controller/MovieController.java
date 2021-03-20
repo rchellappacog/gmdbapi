@@ -3,13 +3,11 @@ package com.galvanize.GMDB.Controller;
 import com.galvanize.GMDB.Exception.MovieNotFoundException;
 import com.galvanize.GMDB.Service.MovieService;
 import com.galvanize.GMDB.request.MovieRequest;
-import com.galvanize.GMDB.response.MovieResponse;
+import com.galvanize.GMDB.response.CustomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collections;
 
 @RestController
 public class MovieController {
@@ -27,6 +25,6 @@ public class MovieController {
 
     @PostMapping("/movies")
     public ResponseEntity<?> createMovie(@RequestBody MovieRequest movie){
-        return new ResponseEntity<MovieResponse>(movieService.create(movie), HttpStatus.CREATED);
+        return new ResponseEntity<CustomResponse>(movieService.create(movie), HttpStatus.CREATED);
     }
 }

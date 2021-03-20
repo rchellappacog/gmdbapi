@@ -6,7 +6,7 @@ import com.galvanize.GMDB.Exception.MovieNotFoundException;
 import com.galvanize.GMDB.repository.MovieRepository;
 import com.galvanize.GMDB.repository.RatingRepository;
 import com.galvanize.GMDB.request.RatingRequest;
-import com.galvanize.GMDB.response.MovieResponse;
+import com.galvanize.GMDB.response.CustomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +30,8 @@ public class RatingService {
         movieRating.setNumberOfStars(ratingRequest.getStars());
 
         ratingRepository.save(movieRating);
-        MovieResponse movieResponse = new MovieResponse();
-        movieResponse.setMessage("A rating has been added");
-        return new ResponseEntity<>(movieResponse, HttpStatus.CREATED);
+        CustomResponse customResponse = new CustomResponse();
+        customResponse.setMessage("A rating has been added");
+        return new ResponseEntity<>(customResponse, HttpStatus.CREATED);
     }
 }

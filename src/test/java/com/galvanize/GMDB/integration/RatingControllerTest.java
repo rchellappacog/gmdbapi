@@ -14,7 +14,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -48,7 +50,7 @@ public class RatingControllerTest {
 
         RatingRequest ratingRequest = new RatingRequest();
         ratingRequest.setMovieTitle("Avengers");
-        ratingRequest.setStars(4);
+        ratingRequest.setStars(5);
 
         RequestBuilder rq = post("/rating")
                 .content(objectMapper.writeValueAsString(ratingRequest))
@@ -57,5 +59,16 @@ public class RatingControllerTest {
 
         mockMvc.perform(rq).andExpect(status().isCreated())
         .andExpect(jsonPath("message").value("A rating has been added"));
+
+        RequestBuilder get = get("/movies/Avengers");
+        mockMvc.perform(get)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("title").value("Avengers"))
+                .andExpect(jsonPath("director").value("Joss"))
+                .andExpect(jsonPath("actors").value("Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth"))
+                .andExpect(jsonPath("releasedYear").value("2012"))
+                .andExpect(jsonPath("description").value("Avengeeeeeeee"))
+                .andExpect(jsonPath("rating").value("5"))
+                .andDo(print());
     }
 }
