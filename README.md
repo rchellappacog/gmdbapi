@@ -176,7 +176,14 @@ File Tree.
 
 
 ```text
-
+│   .gitignore
+│   build.gradle
+│   gradlew
+│   gradlew.bat
+│   README.md
+│   settings.gradle
+│   story.html
+│   table.html
 └───src
     ├───main
     │   ├───generated
@@ -184,18 +191,52 @@ File Tree.
     │   │   └───com
     │   │       └───galvanize
     │   │           └───GMDB
+    │   │               │   GmdbApplication.java
+    │   │               │
     │   │               ├───Controller
-    │   │               ├───Pojo
+    │   │               │       MovieController.java
+    │   │               │       RatingController.java
+    │   │               │
+    │   │               ├───Entity
+    │   │               │       Movie.java
+    │   │               │       MovieRating.java
+    │   │               │
+    │   │               ├───Exception
+    │   │               │       MovieNotFoundException.java
+    │   │               │       MyExceptionHandler.java
+    │   │               │       RatingStarException.java
+    │   │               │
+    │   │               ├───repository
+    │   │               │       MovieRepository.java
+    │   │               │       RatingRepository.java
+    │   │               │
     │   │               ├───request
+    │   │               │       MovieRequest.java
+    │   │               │       RatingRequest.java
+    │   │               │
     │   │               ├───response
+    │   │               │       CustomResponse.java
+    │   │               │       MovieResponse.java
+    │   │               │
     │   │               └───Service
+    │   │                       MovieService.java
+    │   │                       RatingService.java
+    │   │
     │   └───resources
+    │           application.properties
+    │
     └───test
         └───java
             └───com
                 └───galvanize
                     └───GMDB
+                        │   GmdbApplicationTests.java
+                        │
                         └───integration
+                                MovieControllerTest.java
+                                RatingControllerTest.java
+
+
 
 ```
 
