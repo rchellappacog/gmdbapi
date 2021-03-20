@@ -1,6 +1,7 @@
 package com.galvanize.GMDB.Controller;
 
 import com.galvanize.GMDB.Exception.MovieNotFoundException;
+import com.galvanize.GMDB.Exception.RatingStarException;
 import com.galvanize.GMDB.Service.RatingService;
 import com.galvanize.GMDB.request.RatingRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class RatingController {
     private RatingService ratingService;
 
     @PostMapping
-    public ResponseEntity<?> addRatingToMovie(@RequestBody RatingRequest ratingRequest) throws MovieNotFoundException {
+    public ResponseEntity<?> addRatingToMovie(@RequestBody RatingRequest ratingRequest) throws MovieNotFoundException, RatingStarException {
         return ratingService.addRating(ratingRequest);
     }
 }

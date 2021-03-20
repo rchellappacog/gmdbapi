@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RatingRequest {
     private String movieTitle;
-    private int stars;
+    private String stars;
     private String review;
 }

@@ -16,4 +16,11 @@ public class MyExceptionHandler extends ResponseEntityExceptionHandler {
         customResponse.setMessage(exception.getMessage());
         return  new ResponseEntity<>(customResponse, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(RatingStarException.class)
+    public ResponseEntity<?> handleRatingStarException(RatingStarException exception) {
+        CustomResponse customResponse = new CustomResponse();
+        customResponse.setMessage(exception.getMessage());
+        return  new ResponseEntity<>(customResponse, HttpStatus.BAD_REQUEST);
+    }
 }

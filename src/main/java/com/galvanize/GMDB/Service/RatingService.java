@@ -3,6 +3,7 @@ package com.galvanize.GMDB.Service;
 import com.galvanize.GMDB.Entity.Movie;
 import com.galvanize.GMDB.Entity.MovieRating;
 import com.galvanize.GMDB.Exception.MovieNotFoundException;
+import com.galvanize.GMDB.Exception.RatingStarException;
 import com.galvanize.GMDB.repository.MovieRepository;
 import com.galvanize.GMDB.repository.RatingRepository;
 import com.galvanize.GMDB.request.RatingRequest;
@@ -20,14 +21,16 @@ public class RatingService {
     @Autowired
     private RatingRepository ratingRepository;
 
-    public ResponseEntity<?> addRating(RatingRequest ratingRequest) throws MovieNotFoundException {
+    public ResponseEntity<?> addRating(RatingRequest ratingRequest) throws MovieNotFoundException, RatingStarException {
         Movie savedMovie = movieRepository.findByTitle(ratingRequest.getMovieTitle());
         if(savedMovie==null)
             throw new MovieNotFoundException("Movie does not exist");
 
+        if(ratingRequest.getStars()==null) throw new RatingStarException("Star rating is required");
+
         MovieRating movieRating = new MovieRating();
         movieRating.setMovie(savedMovie);
-        movieRating.setNumberOfStars(ratingRequest.getStars());
+        movieRating.setNumberOfStars(Integer.parseInt(ratingRequest.getStars()));
         movieRating.setReview(ratingRequest.getReview());
 
         ratingRepository.save(movieRating);

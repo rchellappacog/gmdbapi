@@ -57,7 +57,7 @@ public class RatingControllerTest {
 
         RatingRequest ratingRequest = new RatingRequest();
         ratingRequest.setMovieTitle("Avengers");
-        ratingRequest.setStars(5);
+        ratingRequest.setStars(String.valueOf(5));
 
         RequestBuilder rq = post("/rating")
                 .content(objectMapper.writeValueAsString(ratingRequest))
@@ -96,7 +96,7 @@ public class RatingControllerTest {
 
         RatingRequest ratingRequest = new RatingRequest();
         ratingRequest.setMovieTitle("Avengers");
-        ratingRequest.setStars(3);
+        ratingRequest.setStars(String.valueOf(3));
 
         RequestBuilder rq = post("/rating")
                 .content(objectMapper.writeValueAsString(ratingRequest))
@@ -134,7 +134,7 @@ public class RatingControllerTest {
 
         RatingRequest ratingRequest = new RatingRequest();
         ratingRequest.setMovieTitle("Avengers");
-        ratingRequest.setStars(5);
+        ratingRequest.setStars(String.valueOf(5));
         ratingRequest.setReview("Hate Thanos.");
 
 
@@ -158,5 +158,31 @@ public class RatingControllerTest {
                 .andExpect(jsonPath("reviews", hasSize(1)))
                 .andExpect(jsonPath("$.reviews[0]").value("Hate Thanos."))
                 .andDo(print());
+    }
+
+    @Test
+    public void submitRatingAndWithoutStarsToMovieTest() throws Exception {
+        Movie movie = new Movie();
+        movie.setTitle("Avengers");
+        movie.setDirector("Joss");
+        movie.setActors("Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth");
+        movie.setDescription("Avengeeeeeeee");
+        movie.setReleasedYear("2012");
+        movieRepository.save(movie);
+
+        RatingRequest ratingRequest = new RatingRequest();
+        ratingRequest.setMovieTitle("Avengers");
+//        ratingRequest.setStars(5);
+        ratingRequest.setReview("Hate Thanos.");
+
+
+        RequestBuilder rq = post("/rating")
+                .content(objectMapper.writeValueAsString(ratingRequest))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON);
+
+        mockMvc.perform(rq).andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("message").value("Star rating is required"));
+
     }
 }
