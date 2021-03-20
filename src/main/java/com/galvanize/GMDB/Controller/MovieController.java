@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 
 @RestController
-@RequestMapping("/movies")
-
 public class MovieController {
     @Autowired
     private MovieService movieService;
 
-    @GetMapping("/{movieName}")
+    @GetMapping(value={"/movies", "/movies/{movieName}"})
     public ResponseEntity<?> getMovie(@PathVariable(required = false) String movieName){
         return movieName == null ?
                 ResponseEntity.ok(movieService.getMovies())
@@ -26,7 +24,7 @@ public class MovieController {
                 ;
     }
 
-    @PostMapping
+    @PostMapping("/movies")
     public ResponseEntity<?> createMovie(@RequestBody MovieRequest movie){
         return new ResponseEntity<MovieResponse>(movieService.create(movie), HttpStatus.CREATED);
     }

@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -86,10 +87,22 @@ public class MovieControllerTest {
 
     @Test
     public void getMovieWhenManyMovieExistTest() throws Exception {
-        RequestBuilder go = get("/movies");
+        Movie avengers = new Movie();avengers.setName("Avengers");
+        Movie wonderwoman = new Movie();wonderwoman.setName("Wonder Woman");
+        Movie justiceLeague = new Movie();justiceLeague.setName("Justice League");
+        Movie starWars = new Movie();starWars.setName("Star Wars");
+        MovieService.movieList.addAll(Arrays.asList(avengers, wonderwoman, justiceLeague, starWars));
+        RequestBuilder go = get("/movies")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON);
+
         mockMvc.perform(go)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(4)))
+                .andExpect(jsonPath("$[0].name").value("Avengers"))
+                .andExpect(jsonPath("$[1].name").value("Wonder Woman"))
+                .andExpect(jsonPath("$[2].name").value("Justice League"))
+                .andExpect(jsonPath("$[3].name").value("Star Wars"))
                 .andDo(print());
     }
 }
