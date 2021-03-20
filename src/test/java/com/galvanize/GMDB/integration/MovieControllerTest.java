@@ -74,7 +74,7 @@ public class MovieControllerTest {
         movie.setDirector("Joss");
         movie.setActors("Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth");
         movie.setDescription("Avengeeeeeeee");
-        movie.setRating(null);
+        movie.setRating("");
         movie.setReleasedYear("2012");
 
         MovieService.movieList.add(movie);
@@ -85,7 +85,7 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("director").value("Joss"))
                 .andExpect(jsonPath("actors").value("Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth"))
                 .andExpect(jsonPath("releasedYear").value("2012"))
-                .andExpect(jsonPath("rating").value(null))
+                .andExpect(jsonPath("rating").value(""))
                                 .andExpect(jsonPath("description").value("Avengeeeeeeee"))
                 .andDo(print());
     }
