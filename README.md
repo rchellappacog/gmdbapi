@@ -114,7 +114,7 @@ Schemes: http
             <a href="#summary">/movies/</a>
         </td>
         <td style="border: 1px solid #ddd;padding: 5px;">
-            <a href="#">GET</a>
+            <a href="#get-movies">GET</a>
         </td>
         <td style="border: 1px solid #ddd;padding: 5px;">
             <p>Get list of movies. </p>
@@ -125,7 +125,7 @@ Schemes: http
     </tr>
     <tr>
         <td style="border: 1px solid #ddd;padding: 5px;">
-            <a href="#">POST</a>
+            <a href="#post-movies">POST</a>
         </td>
         <td style="border: 1px solid #ddd;padding: 5px;">
             <p>Create a Movie Into the Database</p>
@@ -139,7 +139,7 @@ Schemes: http
             <a href="#summary">/movies/{movieName}</a>
         </td>
         <td style="border: 1px solid #ddd;padding: 5px;">
-            <a href="#">GET</a>
+            <a href="#get-moviesmoviename">GET</a>
         </td>
         <td style="border: 1px solid #ddd;padding: 5px;">
             <p>Get Movie by Movie Name</p>
@@ -153,7 +153,7 @@ Schemes: http
             <a href="#summary">/rating</a>
         </td>
         <td style="border: 1px solid #ddd;padding: 5px;">
-            <a href="#">POST</a>
+            <a href="#post-rating">POST</a>
         </td>
         <td style="border: 1px solid #ddd;padding: 5px;">
             <p>Submit Rating of a Movie</p>
@@ -164,6 +164,123 @@ Schemes: http
     </tr>
     </tbody>
 </table>
+
+#### API Details
+
+#### POST /movies/
+Response Header
+```text
+    Status: 201 CREATED
+```
+Request Body
+```json5
+{
+  "title": "Avengers",
+  "director": "Joss",
+  "actors": "Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth",
+  "releasedYear": "2012",
+  "description": "Avengeeeeeeee"
+}
+```
+
+Response Header
+```text
+[Content-Type:"application/json"]
+```
+
+Response Body
+```json5
+{
+  "message": "Movie has been created."
+}
+```
+
+#### GET /movies/
+Response Header
+```text
+    Status: 200 OK
+```
+
+Response Body
+```json5
+[
+   {
+      "title": "Avengers",
+      "director": "Joss",
+      "actors": "Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth",
+      "releasedYear": "2012",
+      "description": "Avengeeeeeeee"
+   },
+   {
+      "title": "Avengers",
+      "director": "Joss",
+      "actors": "Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth",
+      "releasedYear": "2012",
+      "description": "Avengeeeeeeee"
+   },
+   ...
+]
+```
+#### GET /movies/{movieName}
+Response Header
+```text
+    Status: 200 OK
+```
+Response Body
+```json5
+
+{
+   "title": "Avengers",
+   "director": "Joss",
+   "actors": "Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth",
+   "releasedYear": "2012",
+   "description": "Avengeeeeeeee"
+}
+
+```
+
+Response Header
+```text
+    Status: 404 NOT FOUND
+```
+Response Body
+```json5
+
+{
+   "message": "Movie not available"
+}
+
+```
+
+
+#### POST /rating
+Request Body 
+```json5
+{
+  "movieTitle": "Avengers",
+  "stars": "5",
+  "review": "Hate Thanos."
+}
+```
+
+Response Header
+```text
+Status: 201 Created
+STatus: 400 Client Error
+```
+
+Respnse Body
+```json5
+{
+  "message": "A rating has been added"
+}
+```
+
+```json5
+{
+  "message": "Star rating is required"
+}
+```
 
 ## What's included
 

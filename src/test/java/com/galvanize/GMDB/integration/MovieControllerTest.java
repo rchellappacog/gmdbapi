@@ -55,6 +55,10 @@ public class MovieControllerTest {
     public void postMovieWhenReleasedTest() throws Exception {
         MovieRequest mr = new MovieRequest();
         mr.setTitle("Aliens");
+        mr.setDirector("Joss");
+        mr.setActors("Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth");
+        mr.setDescription("Avengeeeeeeee");
+        mr.setReleasedYear("2012");
         RequestBuilder post = post("/movies")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)

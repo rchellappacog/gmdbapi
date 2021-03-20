@@ -65,7 +65,7 @@ public class RatingControllerTest {
                 .accept(MediaType.APPLICATION_JSON);
 
         mockMvc.perform(rq).andExpect(status().isCreated())
-        .andExpect(jsonPath("message").value("A rating has been added"));
+        .andExpect(jsonPath("message").value("A rating has been added")).andDo(print());
 
         RequestBuilder get = get("/movies/Avengers");
         mockMvc.perform(get)
@@ -104,7 +104,7 @@ public class RatingControllerTest {
                 .accept(MediaType.APPLICATION_JSON);
 
         mockMvc.perform(rq).andExpect(status().isCreated())
-                .andExpect(jsonPath("message").value("A rating has been added"));
+                .andExpect(jsonPath("message").value("A rating has been added")).andDo(print());
 
         RequestBuilder get = get("/movies/Avengers");
         mockMvc.perform(get)
@@ -144,7 +144,7 @@ public class RatingControllerTest {
                 .accept(MediaType.APPLICATION_JSON);
 
         mockMvc.perform(rq).andExpect(status().isCreated())
-                .andExpect(jsonPath("message").value("A rating has been added"));
+                .andExpect(jsonPath("message").value("A rating has been added")).andDo(print());
 
         RequestBuilder get = get("/movies/Avengers");
         mockMvc.perform(get)
@@ -182,7 +182,7 @@ public class RatingControllerTest {
                 .accept(MediaType.APPLICATION_JSON);
 
         mockMvc.perform(rq).andExpect(status().is4xxClientError())
-                .andExpect(jsonPath("message").value("Star rating is required"));
+                .andExpect(jsonPath("message").value("Star rating is required")).andDo(print());
 
     }
 }
