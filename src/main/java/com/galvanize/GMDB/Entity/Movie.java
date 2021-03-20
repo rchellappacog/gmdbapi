@@ -1,12 +1,9 @@
 package com.galvanize.GMDB.Entity;
 
 import lombok.Data;
-import org.hibernate.annotations.GeneratorType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -20,5 +17,6 @@ public class Movie {
     private String actors;
     private String releasedYear;
     private String description;
-    private String rating;
+    @OneToMany(mappedBy = "movie")
+    private List<MovieRating> rating;
 }

@@ -90,7 +90,6 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("director").value("Joss"))
                 .andExpect(jsonPath("actors").value("Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth"))
                 .andExpect(jsonPath("releasedYear").value("2012"))
-                .andExpect(jsonPath("rating").value(""))
                 .andExpect(jsonPath("description").value("Avengeeeeeeee"))
                 .andDo(print());
     }

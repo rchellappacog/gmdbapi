@@ -21,7 +21,6 @@ public class MovieService {
         newMovie.setTitle(movie.getTitle());
         newMovie.setActors(movie.getActors());
         newMovie.setDescription(movie.getDescription());
-        newMovie.setRating(movie.getRating());
         newMovie.setReleasedYear(movie.getReleasedYear());
         movieRepository.save(newMovie);
         return new MovieResponse("Movie has been created.");
