@@ -90,6 +90,24 @@ public class MovieControllerTest {
                 .andDo(print());
     }
 
+    @Test
+    public void getMessageWhenMovieNotExistTest() throws Exception {
+        Movie movie = new Movie();
+        movie.setTitle("Avengers");
+        movie.setDirector("Joss");
+        movie.setActors("Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth");
+        movie.setDescription("Avengeeeeeeee");
+        movie.setRating("");
+        movie.setReleasedYear("2012");
+
+        MovieService.movieList.add(movie);
+        RequestBuilder go = get("/movies/AnythingElse");
+        mockMvc.perform(go)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("message").value("Movie not available"))
+                .andDo(print());
+    }
+
     /**
      * Given the GBDB has many movies
      * When I visit GMDB movies

@@ -20,7 +20,7 @@ public class MovieController {
         return movieName == null ?
                 ResponseEntity.ok(movieService.getMovies())
                 :
-                ResponseEntity.ok(movieService.getMovieByName(movieName))
+                ResponseEntity.ok(movieService.getMovieByName(movieName)!=null?movieService.getMovieByName(movieName):new MovieResponse("Movie not available"))
                 ;
     }
 
