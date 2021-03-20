@@ -17,6 +17,6 @@ public class Movie {
     private String actors;
     private String releasedYear;
     private String description;
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<MovieRating> rating;
 }
