@@ -40,6 +40,7 @@ public class MovieService {
                     movieResponse.setDirector(movie.getDirector());
                     movieResponse.setDescription(movie.getDescription());
                     movieResponse.setRating(calculateRating(movie));
+                    movieResponse.setReviews(movie.getRating().stream().map(MovieRating::getReview).collect(Collectors.toList()));
                     return movieResponse;
                 }).collect(Collectors.toList());
     }
@@ -55,6 +56,7 @@ public class MovieService {
         movieResponse.setDirector(savedMovie.getDirector());
         movieResponse.setDescription(savedMovie.getDescription());
         movieResponse.setRating(calculateRating(savedMovie));
+        movieResponse.setReviews(savedMovie.getRating().stream().map(MovieRating::getReview).collect(Collectors.toList()));
         return movieResponse;
     }
 

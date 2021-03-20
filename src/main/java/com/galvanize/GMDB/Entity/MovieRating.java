@@ -15,6 +15,8 @@ public class MovieRating {
 
     private int numberOfStars;
 
+    private String review;
+
     @ManyToOne
     @JoinColumn(name="movie_id")
     @JsonIgnore

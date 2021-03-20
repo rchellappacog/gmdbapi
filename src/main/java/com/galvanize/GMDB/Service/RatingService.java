@@ -28,6 +28,7 @@ public class RatingService {
         MovieRating movieRating = new MovieRating();
         movieRating.setMovie(savedMovie);
         movieRating.setNumberOfStars(ratingRequest.getStars());
+        movieRating.setReview(ratingRequest.getReview());
 
         ratingRepository.save(movieRating);
         CustomResponse customResponse = new CustomResponse();
