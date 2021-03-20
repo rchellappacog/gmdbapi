@@ -148,6 +148,20 @@ Schemes: http
             <p>MovieController -> getMovie()</p>
         </td>
     </tr>
+<tr>
+        <td style="border: 1px solid #ddd;padding: 5px;" rowspan="2">
+            <a href="#summary">/rating</a>
+        </td>
+        <td style="border: 1px solid #ddd;padding: 5px;">
+            <a href="#">POST</a>
+        </td>
+        <td style="border: 1px solid #ddd;padding: 5px;">
+            <p>Submit Rating of a Movie</p>
+        </td>
+        <td style="border: 1px solid #ddd;padding: 5px;">
+            <p>RatingController -> addRatingToMovie()</p>
+        </td>
+    </tr>
     </tbody>
 </table>
 
