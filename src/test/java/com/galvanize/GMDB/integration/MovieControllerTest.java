@@ -80,7 +80,6 @@ public class MovieControllerTest {
         movie.setDirector("Joss");
         movie.setActors("Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth");
         movie.setDescription("Avengeeeeeeee");
-        movie.setRating("");
         movie.setReleasedYear("2012");
         movieRepository.save(movie);
 
@@ -103,7 +102,6 @@ public class MovieControllerTest {
         movie.setDirector("Joss");
         movie.setActors("Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth");
         movie.setDescription("Avengeeeeeeee");
-        movie.setRating("");
         movie.setReleasedYear("2012");
         movieRepository.save(movie);
 
@@ -145,4 +143,5 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("$[3].title").value("Star Wars"))
                 .andDo(print());
     }
+
 }
