@@ -19,7 +19,7 @@ public class MovieController {
 
     @GetMapping
     public ResponseEntity<?> getMovie(){
-        return ResponseEntity.ok(Collections.emptyList());
+        return ResponseEntity.ok(movieService.getMovies());
     }
 
     @PostMapping
